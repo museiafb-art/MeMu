@@ -31,6 +31,19 @@ import { colors, spacing, radii } from "@memu/theme/tokens";
 
 ## Paleta
 
-Inicial neutra/cálida para una app familiar. La identidad visual definitiva
-está pendiente de definición con Sofi: cuando esté, se cambia acá y se
-regenera.
+Identidad de marca **aprobada por Sofi el 2026-10-19**. Concepto: "La voz de
+la familia, sin pantallas" — marca juguete estilo Bluey: formas redondeadas,
+pasteles cálidos, contornos amables. Primario azul Bluey con cuerpo (`#2A6FC2`
+en light), superficies crema, modo oscuro cálido en marrones.
+
+- `colors`: tokens funcionales (convención shadcn). Todos los pares
+  texto/fondo verificados ≥ 4.5:1 (EAA / WCAG AA).
+- `pastels`: tintes decorativos de marca — **nunca para texto**.
+- Tipografía: Nunito (cuerpo, gran legibilidad). Display font **pendiente de
+  elección de Sofi** (Baloo 2 descartada el 2026-10-19; candidatas: Fredoka,
+  Titan One, Chewy, Comfortaa) — `typography.fontFamily.display` usa Nunito
+  provisoriamente. Detalle completo en
+  `~/workspace/memu-brand/identidad-memu-propuesta.md`.
+
+Para cambiar la marca se edita `src/tokens.ts` y se regenera: cambia la web y
+la app a la vez.

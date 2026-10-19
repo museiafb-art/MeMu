@@ -5,97 +5,134 @@
  * sale de acá. Para cambiar un color se cambia en este archivo y se regenera
  * el CSS con `pnpm --filter @memu/theme build`.
  *
- * - `colors.light` / `colors.dark`: paleta cálida pensada para una app familiar.
- *   Las claves siguen la convención shadcn (background, primary, muted, ...)
- *   para que el CSS generado las mapee directo a las utilidades de Tailwind v4
- *   (`bg-background`, `text-primary`, ...) y al theme de Uniwind en mobile.
- * - La identidad visual final está pendiente de definición con Sofi: esta es
- *   una paleta inicial neutra/cálida, no la marca definitiva.
+ * Identidad de marca APROBADA por Sofi el 2026-10-19.
+ * Concepto: "La voz de la familia, sin pantallas." Marca juguete estilo Bluey:
+ * formas redondeadas, pasteles cálidos, contornos amables. Infantil para los
+ * niños, confiable para los padres, legible para los mayores.
+ *
+ * - `colors.light` / `colors.dark`: las claves siguen la convención shadcn
+ *   (background, primary, muted, ...) para que el CSS generado las mapee
+ *   directo a las utilidades de Tailwind v4 (`bg-background`, `text-primary`,
+ *   ...) y al theme de Uniwind en mobile.
+ * - Accesibilidad (EAA / WCAG AA): los pasteles viven SOLO en superficies
+ *   decorativas (`pastels`, nunca para texto). Todos los pares texto/fondo de
+ *   `colors` fueron verificados ≥ 4.5:1.
+ * - `pastels`: tintes decorativos de marca (ilustración, fondos lúdicos).
+ *   NUNCA para texto funcional.
+ * - Tipografía: Nunito (cuerpo/UI, gran legibilidad para mayores) ya cargada.
+ *   Display font PENDIENTE de elección de Sofi (2026-10-19: Baloo 2 descartada;
+ *   candidatas: Fredoka, Titan One, Chewy, Comfortaa). Mientras tanto `display`
+ *   usa Nunito para no dejar un hueco: cuando Sofi elija, se cambia en un solo
+ *   lugar (tokens + next/font en web + expo-google-fonts en native).
  */
 
 export const colors = {
 	light: {
-		background: "#FBF7EF",
-		foreground: "#221A12",
+		background: "#FFF8EE",
+		foreground: "#2E2A24",
 		card: "#FFFFFF",
-		cardForeground: "#221A12",
+		cardForeground: "#2E2A24",
 		popover: "#FFFFFF",
-		popoverForeground: "#221A12",
-		primary: "#BC5A1A",
-		primaryForeground: "#FFF9F1",
-		secondary: "#EFE6D3",
-		secondaryForeground: "#4A3E2D",
-		muted: "#EFE6D3",
-		mutedForeground: "#77694F",
-		accent: "#E4EFE3",
-		accentForeground: "#2E5B3E",
-		destructive: "#BE3A2B",
-		destructiveForeground: "#FFF9F1",
-		border: "#E2D5BC",
-		input: "#E2D5BC",
-		ring: "#BC5A1A",
-		success: "#2E7D4F",
-		successForeground: "#F4FBF6",
-		warning: "#A86A12",
-		warningForeground: "#FFF9F1",
-		info: "#2D6CDF",
-		infoForeground: "#F4F8FF",
-		sidebar: "#F6F0E2",
-		sidebarForeground: "#221A12",
-		sidebarPrimary: "#BC5A1A",
-		sidebarPrimaryForeground: "#FFF9F1",
-		sidebarAccent: "#EFE6D3",
-		sidebarAccentForeground: "#4A3E2D",
-		sidebarBorder: "#E2D5BC",
-		sidebarRing: "#BC5A1A",
+		popoverForeground: "#2E2A24",
+		primary: "#2A6FC2",
+		primaryForeground: "#FFFFFF",
+		secondary: "#FBE7C6",
+		secondaryForeground: "#8A4E0F",
+		muted: "#F5EDDD",
+		mutedForeground: "#6F6355",
+		accent: "#FFE9A8",
+		accentForeground: "#6B4E00",
+		destructive: "#C7382C",
+		destructiveForeground: "#FFFFFF",
+		border: "#EADDC6",
+		input: "#EFE3CC",
+		ring: "#2A6FC2",
+		success: "#1F7A52",
+		successForeground: "#FFFFFF",
+		warning: "#9A5F0B",
+		warningForeground: "#FFFFFF",
+		info: "#2A6FC2",
+		infoForeground: "#FFFFFF",
+		sidebar: "#FBF3E4",
+		sidebarForeground: "#2E2A24",
+		sidebarPrimary: "#2A6FC2",
+		sidebarPrimaryForeground: "#FFFFFF",
+		sidebarAccent: "#F5EDDD",
+		sidebarAccentForeground: "#4A4238",
+		sidebarBorder: "#EADDC6",
+		sidebarRing: "#2A6FC2",
 	},
 	dark: {
-		background: "#161210",
-		foreground: "#F4EDE0",
-		card: "#211B15",
-		cardForeground: "#F4EDE0",
-		popover: "#211B15",
-		popoverForeground: "#F4EDE0",
-		primary: "#E08A3C",
-		primaryForeground: "#231204",
-		secondary: "#2D251C",
-		secondaryForeground: "#D9CBAF",
-		muted: "#2D251C",
-		mutedForeground: "#A79B82",
-		accent: "#1E3A2A",
-		accentForeground: "#A5D8B4",
-		destructive: "#E0685C",
-		destructiveForeground: "#231204",
-		border: "#3B3227",
-		input: "#3B3227",
-		ring: "#E08A3C",
-		success: "#63B57F",
-		successForeground: "#0C1A11",
-		warning: "#D9A441",
-		warningForeground: "#231204",
-		info: "#7AA5EC",
-		infoForeground: "#0C1526",
-		sidebar: "#1E1813",
-		sidebarForeground: "#F4EDE0",
-		sidebarPrimary: "#E08A3C",
-		sidebarPrimaryForeground: "#231204",
-		sidebarAccent: "#2D251C",
+		background: "#1B1611",
+		foreground: "#F8F0E1",
+		card: "#251F17",
+		cardForeground: "#F8F0E1",
+		popover: "#251F17",
+		popoverForeground: "#F8F0E1",
+		primary: "#7FB6EC",
+		primaryForeground: "#16283A",
+		secondary: "#3A2C18",
+		secondaryForeground: "#F2C384",
+		muted: "#2A2318",
+		mutedForeground: "#B9AC94",
+		accent: "#4A3A12",
+		accentForeground: "#FFDA7A",
+		destructive: "#E4685C",
+		destructiveForeground: "#22100B",
+		border: "#3E3423",
+		input: "#332B1E",
+		ring: "#7FB6EC",
+		success: "#5FC78E",
+		successForeground: "#0C2115",
+		warning: "#E0A63F",
+		warningForeground: "#241A05",
+		info: "#7FB6EC",
+		infoForeground: "#16283A",
+		sidebar: "#201A12",
+		sidebarForeground: "#F8F0E1",
+		sidebarPrimary: "#7FB6EC",
+		sidebarPrimaryForeground: "#16283A",
+		sidebarAccent: "#2A2318",
 		sidebarAccentForeground: "#D9CBAF",
-		sidebarBorder: "#3B3227",
-		sidebarRing: "#E08A3C",
+		sidebarBorder: "#3E3423",
+		sidebarRing: "#7FB6EC",
+	},
+} as const;
+
+/**
+ * Tintes pasteles decorativos de marca. SOLO decoración (ilustración, fondos
+ * lúdicos): NUNCA para texto funcional, no tienen el contraste necesario.
+ */
+export const pastels = {
+	light: {
+		pastelSky: "#BEE0F7",
+		pastelPeach: "#F9CF9C",
+		pastelButter: "#FFE3A3",
+		pastelMint: "#BDE8CC",
+		pastelLilac: "#D9C9F2",
+		pastelRose: "#F4C3CE",
+	},
+	dark: {
+		pastelSky: "#27455F",
+		pastelPeach: "#5C3E1E",
+		pastelButter: "#574512",
+		pastelMint: "#1F4A33",
+		pastelLilac: "#3E3358",
+		pastelRose: "#55293A",
 	},
 } as const;
 
 /** Paleta para gráficos (índices 1–5). */
 export const charts = {
-	light: ["#BC5A1A", "#2E7D4F", "#2D6CDF", "#A86A12", "#7C5CBF"],
-	dark: ["#E08A3C", "#63B57F", "#7AA5EC", "#D9A441", "#A78BFA"],
+	light: ["#2A6FC2", "#1F7A52", "#9A5F0B", "#C7382C", "#7C5CBF"],
+	dark: ["#7FB6EC", "#5FC78E", "#E0A63F", "#E4685C", "#A78BFA"],
 } as const;
 
 export type ThemeMode = keyof typeof colors;
 export type ColorToken = keyof typeof colors.light;
+export type PastelToken = keyof typeof pastels.light;
 
-/** Espaciado base 4px. */
+/** Espaciado base 4px, con aire generoso (marca juguete). */
 export const spacing = {
 	xs: 4,
 	sm: 8,
@@ -106,19 +143,20 @@ export const spacing = {
 	"3xl": 64,
 } as const;
 
-/** Radios de borde. */
+/** Radios de borde generosos (juguete, no corporativo). */
 export const radii = {
-	sm: 6,
-	md: 10,
-	lg: 16,
-	xl: 24,
+	sm: 8,
+	md: 14,
+	lg: 20,
+	xl: 28,
 	full: 9999,
 } as const;
 
-/** Tipografía del sistema (nada de fuentes externas en Fase 0). */
+/** Tipografía: Nunito (cuerpo). Display pendiente de elección de Sofi. */
 export const typography = {
 	fontFamily: {
-		sans: 'ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif',
+		display: '"Nunito", system-ui, sans-serif',
+		sans: '"Nunito", system-ui, sans-serif',
 		mono: 'ui-monospace, "SF Mono", Menlo, Consolas, monospace',
 	},
 	fontSize: {
@@ -139,6 +177,7 @@ export const typography = {
 
 export const theme = {
 	colors,
+	pastels,
 	charts,
 	spacing,
 	radii,

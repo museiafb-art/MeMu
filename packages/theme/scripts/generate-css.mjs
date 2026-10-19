@@ -8,7 +8,7 @@ import { writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
-import { charts, colors, radii } from "../src/tokens.ts";
+import { charts, colors, pastels, radii } from "../src/tokens.ts";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..", "src");
 
@@ -19,13 +19,20 @@ const toKebab = (s) => s.replace(/([a-z0-9])([A-Z])/g, "$1-$2").toLowerCase();
 
 function varsBlock(palette) {
 	return Object.entries(palette)
-		.map(([key, value]) => `  --${toKebab(key)}: ${value};`)
+		.map(([key, value]) => `\t--${toKebab(key)}: ${value.toLowerCase()};`)
 		.join("\n");
 }
 
 function chartsBlock(mode) {
 	return charts[mode]
-		.map((value, i) => `  --chart-${i + 1}: ${value};`)
+		.map((value, i) => `\t--chart-${i + 1}: ${value.toLowerCase()};`)
+		.join("\n");
+}
+
+/** Tintes pasteles decorativos (nunca para texto): --pastel-sky, etc. */
+function pastelsBlock(mode) {
+	return Object.entries(pastels[mode])
+		.map(([key, value]) => `\t--${toKebab(key)}: ${value.toLowerCase()};`)
 		.join("\n");
 }
 
@@ -33,8 +40,8 @@ function chartsBlock(mode) {
 function buildWebCss() {
 	return (
 		HEADER +
-		`:root {\n${varsBlock(colors.light)}\n${chartsBlock("light")}\n  --radius: ${radii.lg / 16}rem;\n}\n\n` +
-		`.dark {\n${varsBlock(colors.dark)}\n${chartsBlock("dark")}\n}\n`
+		`:root {\n${varsBlock(colors.light)}\n${pastelsBlock("light")}\n${chartsBlock("light")}\n\t--radius: ${radii.lg / 16}rem;\n}\n\n` +
+		`.dark {\n${varsBlock(colors.dark)}\n${pastelsBlock("dark")}\n${chartsBlock("dark")}\n}\n`
 	);
 }
 
@@ -79,14 +86,21 @@ function nativeVarsBlock(mode) {
 	return NATIVE_MAP.map(([cssVar, token]) => {
 		const value = palette[token];
 		if (!value) throw new Error(`Token faltante: colors.${mode}.${token}`);
-		return `      --${cssVar}: ${value};`;
+		return `\t\t\t--${cssVar}: ${value.toLowerCase()};`;
 	}).join("\n");
+}
+
+/** Pasteles decorativos en native (mismo bloque @layer theme). */
+function nativePastelsBlock(mode) {
+	return Object.entries(pastels[mode])
+		.map(([key, value]) => `\t\t\t--${toKebab(key)}: ${value.toLowerCase()};`)
+		.join("\n");
 }
 
 function buildNativeCss() {
 	return (
 		HEADER +
-		`@layer theme {\n  :root {\n    @variant light {\n${nativeVarsBlock("light")}\n    }\n\n    @variant dark {\n${nativeVarsBlock("dark")}\n    }\n  }\n}\n`
+		`@layer theme {\n\t:root {\n\t\t@variant light {\n${nativeVarsBlock("light")}\n${nativePastelsBlock("light")}\n\t\t}\n\n\t\t@variant dark {\n${nativeVarsBlock("dark")}\n${nativePastelsBlock("dark")}\n\t\t}\n\t}\n}\n`
 	);
 }
 
