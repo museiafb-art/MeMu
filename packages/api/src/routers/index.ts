@@ -3,6 +3,8 @@ import type { RouterClient } from "@orpc/server";
 import { eq } from "drizzle-orm";
 
 import { protectedProcedure, publicProcedure } from "../index";
+import { pairingRouter } from "./pairing";
+import { voiceRouter } from "./voice";
 
 export const appRouter = {
 	healthCheck: publicProcedure.handler(() => {
@@ -29,6 +31,12 @@ export const appRouter = {
 			.innerJoin(group, eq(member.groupId, group.id))
 			.where(eq(member.userId, userId));
 	}),
+
+	/** Mensajes de voz: subida, registro, listado, escuchados, push opt-in. */
+	voice: voiceRouter,
+
+	/** Alta y baja de aparatos con código de emparejamiento. */
+	pairing: pairingRouter,
 };
 export type AppRouter = typeof appRouter;
 export type AppRouterClient = RouterClient<typeof appRouter>;

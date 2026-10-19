@@ -7,6 +7,12 @@ export const user = pgTable("user", {
 	email: text("email").notNull().unique(),
 	emailVerified: boolean("email_verified").default(false).notNull(),
 	image: text("image"),
+	/**
+	 * Token de push de Expo del celu. Solo se guarda con opt-in explícito
+	 * (la app lo envía vía `setPushToken`); null = sin notificaciones.
+	 * Spec 02-datos + checklist de privacidad (push solo metadatos).
+	 */
+	pushToken: text("push_token"),
 	createdAt: timestamp("created_at").defaultNow().notNull(),
 	updatedAt: timestamp("updated_at")
 		.defaultNow()

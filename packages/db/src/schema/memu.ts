@@ -125,6 +125,30 @@ export const listenReceipt = pgTable(
 	],
 );
 
+/**
+ * Códigos de emparejamiento (pairing) para dar de alta un aparato.
+ * La app (persona autenticada) genera un código corto de un solo uso asociado
+ * a un grupo; el aparato lo canjea por su token largo (ver `claimPairingCode`).
+ * Expiran a los 10 minutos y no se pueden reusar (`usedAt`).
+ */
+export const pairingCode = pgTable(
+	"pairing_code",
+	{
+		id: text("id").primaryKey().$defaultFn(newId),
+		code: text("code").notNull().unique(),
+		groupId: text("group_id")
+			.notNull()
+			.references(() => group.id, { onDelete: "cascade" }),
+		createdById: text("created_by_id").references(() => user.id, {
+			onDelete: "set null",
+		}),
+		expiresAt: timestamp("expires_at").notNull(),
+		usedAt: timestamp("used_at"),
+		createdAt: timestamp("created_at").defaultNow().notNull(),
+	},
+	(table) => [index("pairing_code_code_idx").on(table.code)],
+);
+
 export const memuRelations = defineRelationsPart(
 	{ device, deviceToken, group, member, voiceMessage, listenReceipt, user },
 	(r) => ({

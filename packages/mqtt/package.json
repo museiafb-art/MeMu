@@ -1,0 +1,21 @@
+{
+	"name": "@memu/mqtt",
+	"type": "module",
+	"exports": {
+		".": "./src/index.ts",
+		"./*": "./src/*.ts"
+	},
+	"scripts": {
+		"build": "tsc -b",
+		"check-types": "tsc -b"
+	},
+	"dependencies": {
+		"mqtt": "^5.14.1"
+	},
+	"devDependencies": {
+		"@memu/config": "workspace:*",
+		"@types/node": "catalog:",
+		"typescript": "^6.0.3",
+		"vitest": "catalog:"
+	}
+}

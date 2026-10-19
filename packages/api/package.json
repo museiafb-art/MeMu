@@ -12,6 +12,8 @@
 	"dependencies": {
 		"@memu/auth": "workspace:*",
 		"@memu/db": "workspace:*",
+		"@memu/mqtt": "workspace:*",
+		"@memu/storage": "workspace:*",
 		"@orpc/client": "catalog:",
 		"@orpc/openapi": "catalog:",
 		"@orpc/server": "catalog:",
@@ -21,6 +23,8 @@
 	},
 	"devDependencies": {
 		"@memu/config": "workspace:*",
-		"typescript": "^6.0.3"
+		"pg-mem": "catalog:",
+		"typescript": "^6.0.3",
+		"vitest": "catalog:"
 	}
 }
