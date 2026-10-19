@@ -19,11 +19,9 @@
  *   `colors` fueron verificados ≥ 4.5:1.
  * - `pastels`: tintes decorativos de marca (ilustración, fondos lúdicos).
  *   NUNCA para texto funcional.
- * - Tipografía: Nunito (cuerpo/UI, gran legibilidad para mayores) ya cargada.
- *   Display font PENDIENTE de elección de Sofi (2026-10-19: Baloo 2 descartada;
- *   candidatas: Fredoka, Titan One, Chewy, Comfortaa). Mientras tanto `display`
- *   usa Nunito para no dejar un hueco: cuando Sofi elija, se cambia en un solo
- *   lugar (tokens + next/font en web + expo-google-fonts en native).
+ * - Tipografía: Nunito (cuerpo/UI, gran legibilidad para mayores) + Titan One
+ *   (display, elegida por Sofi el 2026-10-19). Ambas cargadas de verdad en
+ *   web (next/font) y native (expo-font).
  */
 
 export const colors = {
@@ -152,10 +150,10 @@ export const radii = {
 	full: 9999,
 } as const;
 
-/** Tipografía: Nunito (cuerpo). Display pendiente de elección de Sofi. */
+/** Tipografía: Nunito (cuerpo) + Titan One (display, elegida por Sofi el 2026-10-19). */
 export const typography = {
 	fontFamily: {
-		display: '"Nunito", system-ui, sans-serif',
+		display: '"Titan One", "Nunito", system-ui, sans-serif',
 		sans: '"Nunito", system-ui, sans-serif',
 		mono: 'ui-monospace, "SF Mono", Menlo, Consolas, monospace',
 	},

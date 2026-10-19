@@ -1,16 +1,21 @@
 import type { Metadata } from "next";
-import { Nunito } from "next/font/google";
+import { Nunito, Titan_One } from "next/font/google";
 
 import "../index.css";
 import Header from "@/components/header";
 import Providers from "@/components/providers";
 
-// Display font: pendiente de elección de Sofi (Baloo 2 descartada el
-// 2026-10-19). Cuando elija, se agrega acá + en globals.css (--font-display).
+// Tipografías de marca (Sofi 2026-10-19): Nunito (cuerpo) + Titan One (display).
 const bodyFont = Nunito({
 	variable: "--font-nunito",
 	subsets: ["latin"],
 	weight: ["400", "500", "600", "700"],
+});
+
+const displayFont = Titan_One({
+	variable: "--font-titan-one",
+	subsets: ["latin"],
+	weight: ["400"],
 });
 
 export const metadata: Metadata = {
@@ -25,7 +30,9 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang="en" suppressHydrationWarning>
-			<body className={`${bodyFont.variable} antialiased`}>
+			<body
+				className={`${bodyFont.variable} ${displayFont.variable} antialiased`}
+			>
 				<Providers>
 					<div className="grid h-svh grid-rows-[auto_1fr]">
 						<Header />

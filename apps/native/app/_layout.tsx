@@ -4,8 +4,9 @@ import {
 	Nunito_500Medium,
 	Nunito_600SemiBold,
 	Nunito_700Bold,
-	useFonts,
+	useFonts as useNunitoFonts,
 } from "@expo-google-fonts/nunito";
+import { TitanOne_400Regular } from "@expo-google-fonts/titan-one";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { Stack } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
@@ -36,13 +37,15 @@ function StackLayout() {
 }
 
 export default function Layout() {
-	// Tipografías de marca (Nunito cuerpo; display pendiente de elección
-	// de Sofi — ver @memu/theme). Se cargan antes de ocultar el splash.
-	const [fontsLoaded] = useFonts({
+	// Tipografías de marca (Sofi 2026-10-19): Nunito (cuerpo) + Titan One
+	// (display). Chewy queda reservada para el logo (se define con marketing).
+	// Se cargan antes de ocultar el splash.
+	const [fontsLoaded] = useNunitoFonts({
 		Nunito_400Regular,
 		Nunito_500Medium,
 		Nunito_600SemiBold,
 		Nunito_700Bold,
+		TitanOne_400Regular,
 	});
 
 	useEffect(() => {
