@@ -1,0 +1,12 @@
+{
+	"references": [{ "path": "../../packages/api" }],
+	"extends": "expo/tsconfig.base",
+	"compilerOptions": {
+		"strict": true,
+		"customConditions": ["react-native", "react-native-legacy-deep-imports"],
+		"paths": {
+			"@/*": ["./*"]
+		}
+	},
+	"include": ["**/*.ts", "**/*.tsx", ".expo/types/**/*.ts", "expo-env.d.ts"]
+}

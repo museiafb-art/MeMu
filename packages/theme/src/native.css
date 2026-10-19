@@ -1,0 +1,69 @@
+/* GENERATED from tokens.ts — do not edit by hand. Run: pnpm --filter @memu/theme build */
+
+@layer theme {
+	:root {
+		@variant light {
+			--background: #fbf7ef;
+			--foreground: #221a12;
+			--surface: #ffffff;
+			--surface-foreground: #221a12;
+			--surface-secondary: #efe6d3;
+			--surface-secondary-foreground: #4a3e2d;
+			--surface-tertiary: #efe6d3;
+			--surface-tertiary-foreground: #77694f;
+			--overlay: #ffffff;
+			--overlay-foreground: #221a12;
+			--muted: #77694f;
+			--default: #efe6d3;
+			--default-foreground: #4a3e2d;
+			--accent: #e4efe3;
+			--accent-foreground: #2e5b3e;
+			--success: #2e7d4f;
+			--success-foreground: #f4fbf6;
+			--warning: #a86a12;
+			--warning-foreground: #fff9f1;
+			--danger: #be3a2b;
+			--danger-foreground: #fff9f1;
+			--border: #e2d5bc;
+			--separator: #e2d5bc;
+			--focus: #bc5a1a;
+			--link: #2d6cdf;
+			--field-background: #ffffff;
+			--field-foreground: #221a12;
+			--field-placeholder: #77694f;
+			--field-border: #e2d5bc;
+		}
+
+		@variant dark {
+			--background: #161210;
+			--foreground: #f4ede0;
+			--surface: #211b15;
+			--surface-foreground: #f4ede0;
+			--surface-secondary: #2d251c;
+			--surface-secondary-foreground: #d9cbaf;
+			--surface-tertiary: #2d251c;
+			--surface-tertiary-foreground: #a79b82;
+			--overlay: #211b15;
+			--overlay-foreground: #f4ede0;
+			--muted: #a79b82;
+			--default: #2d251c;
+			--default-foreground: #d9cbaf;
+			--accent: #1e3a2a;
+			--accent-foreground: #a5d8b4;
+			--success: #63b57f;
+			--success-foreground: #0c1a11;
+			--warning: #d9a441;
+			--warning-foreground: #231204;
+			--danger: #e0685c;
+			--danger-foreground: #231204;
+			--border: #3b3227;
+			--separator: #3b3227;
+			--focus: #e08a3c;
+			--link: #7aa5ec;
+			--field-background: #211b15;
+			--field-foreground: #f4ede0;
+			--field-placeholder: #a79b82;
+			--field-border: #3b3227;
+		}
+	}
+}

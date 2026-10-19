@@ -1,0 +1,119 @@
+import { Ionicons } from "@expo/vector-icons";
+import { useQuery } from "@tanstack/react-query";
+import { Card, Chip, useThemeColor } from "heroui-native";
+import { Pressable, Text, View } from "react-native";
+
+import { Container } from "@/components/container";
+import { SignIn } from "@/components/sign-in";
+import { SignUp } from "@/components/sign-up";
+import { authClient } from "@/lib/auth-client";
+import { orpc, queryClient } from "@/utils/orpc";
+
+export default function Home() {
+	const healthCheck = useQuery(orpc.healthCheck.queryOptions());
+	const groups = useQuery(orpc.listGroups.queryOptions());
+	const isConnected = healthCheck?.data === "OK";
+	const isLoading = healthCheck?.isLoading;
+	const { data: session } = authClient.useSession();
+
+	const mutedColor = useThemeColor("muted");
+	const successColor = useThemeColor("success");
+	const dangerColor = useThemeColor("danger");
+
+	return (
+		<Container className="p-6">
+			<View className="mb-6 py-4">
+				<Text className="mb-2 font-bold text-4xl text-foreground">
+					BETTER T STACK
+				</Text>
+			</View>
+
+			{session?.user ? (
+				<Card variant="secondary" className="mb-6 p-4">
+					<Text className="mb-2 text-base text-foreground">
+						Welcome, <Text className="font-medium">{session.user.name}</Text>
+					</Text>
+					<Text className="mb-4 text-muted text-sm">{session.user.email}</Text>
+					<Pressable
+						className="self-start rounded-lg bg-danger px-4 py-3 active:opacity-70"
+						onPress={() => {
+							authClient.signOut();
+							queryClient.invalidateQueries();
+						}}
+					>
+						<Text className="font-medium text-foreground">Sign Out</Text>
+					</Pressable>
+				</Card>
+			) : null}
+
+			<Card variant="secondary" className="p-6">
+				<View className="mb-4 flex-row items-center justify-between">
+					<Card.Title>System Status</Card.Title>
+					<Chip
+						variant="secondary"
+						color={isConnected ? "success" : "danger"}
+						size="sm"
+					>
+						<Chip.Label>{isConnected ? "LIVE" : "OFFLINE"}</Chip.Label>
+					</Chip>
+				</View>
+
+				<Card className="p-4">
+					<View className="flex-row items-center">
+						<View
+							className={`mr-3 h-3 w-3 rounded-full ${isConnected ? "bg-success" : "bg-muted"}`}
+						/>
+						<View className="flex-1">
+							<Text className="mb-1 font-medium text-foreground">
+								ORPC Backend
+							</Text>
+							<Card.Description>
+								{isLoading
+									? "Checking connection..."
+									: isConnected
+										? "Connected to API"
+										: "API Disconnected"}
+							</Card.Description>
+						</View>
+						{isLoading && (
+							<Ionicons name="hourglass-outline" size={20} color={mutedColor} />
+						)}
+						{!isLoading && isConnected && (
+							<Ionicons
+								name="checkmark-circle"
+								size={20}
+								color={successColor}
+							/>
+						)}
+						{!isLoading && !isConnected && (
+							<Ionicons name="close-circle" size={20} color={dangerColor} />
+						)}
+					</View>
+				</Card>
+			</Card>
+
+			<Card variant="secondary" className="mt-6 p-4">
+				<Card.Title className="mb-3">Mis grupos</Card.Title>
+				{groups.isPending && (
+					<Card.Description>Cargando grupos…</Card.Description>
+				)}
+				{groups.data && groups.data.length === 0 && (
+					<Card.Description>
+						Todavía no tenés grupos. En la Fase 1 vas a poder crear el grupo
+						"Familia" y mandar tu primer audio.
+					</Card.Description>
+				)}
+				{groups.data?.map((g) => (
+					<Card.Description key={g.id}>• {g.name}</Card.Description>
+				))}
+			</Card>
+
+			{!session?.user && (
+				<>
+					<SignIn />
+					<SignUp />
+				</>
+			)}
+		</Container>
+	);
+}

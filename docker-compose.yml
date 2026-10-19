@@ -1,0 +1,57 @@
+# MeMu — entorno local (Fase 0)
+#
+# Levanta Postgres (base de datos) y MinIO (bucket S3 local para los audios).
+# Uso:
+#   docker compose up -d
+#   # en apps/web/.env:
+#   DATABASE_URL=postgresql://memu:memu@localhost:5432/memu
+#   S3_ENDPOINT=http://localhost:9000
+#   S3_REGION=us-east-1
+#   S3_BUCKET=memu-audios
+#   S3_ACCESS_KEY_ID=minioadmin
+#   S3_SECRET_ACCESS_KEY=minioadmin
+#   # aplicar el esquema:
+#   pnpm --filter @memu/db db:migrate
+#
+# Producción usa Neon (Postgres) y Cloudflare R2: se "encienden" cargando
+# sus envs, sin cambiar código (ver specs/01-arquitectura.md).
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: memu
+      POSTGRES_PASSWORD: memu
+      POSTGRES_DB: memu
+    ports:
+      - "5432:5432"
+    volumes:
+      - memu-postgres:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U memu -d memu"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  minio:
+    image: minio/minio:latest
+    restart: unless-stopped
+    command: server /data --console-address ":9001"
+    environment:
+      MINIO_ROOT_USER: minioadmin
+      MINIO_ROOT_PASSWORD: minioadmin
+    ports:
+      - "9000:9000" # API S3
+      - "9001:9001" # consola web
+    volumes:
+      - memu-minio:/data
+    healthcheck:
+      test: ["CMD", "mc", "ready", "local"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+volumes:
+  memu-postgres:
+  memu-minio:

@@ -1,0 +1,3 @@
+{
+	"extends": "@memu/config/tsconfig.base.json"
+}

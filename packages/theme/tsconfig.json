@@ -1,0 +1,5 @@
+{
+	"compilerOptions": { "noEmit": true },
+	"extends": "@memu/config/tsconfig.base.json",
+	"include": ["src/tokens.ts"]
+}

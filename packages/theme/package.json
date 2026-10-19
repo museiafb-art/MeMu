@@ -1,0 +1,19 @@
+{
+	"devDependencies": {
+		"@memu/config": "workspace:*",
+		"typescript": "^6.0.3"
+	},
+	"exports": {
+		"./native.css": "./src/native.css",
+		"./tokens": "./src/tokens.ts",
+		"./web.css": "./src/web.css"
+	},
+	"name": "@memu/theme",
+	"private": true,
+	"scripts": {
+		"build": "node ./scripts/generate-css.mjs",
+		"check-types": "tsc --noEmit -p tsconfig.json"
+	},
+	"type": "module",
+	"version": "0.0.1"
+}

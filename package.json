@@ -1,0 +1,36 @@
+{
+	"name": "memu",
+	"private": true,
+	"workspaces": [
+		"apps/*",
+		"packages/*"
+	],
+	"type": "module",
+	"scripts": {
+		"dev": "turbo run dev",
+		"build": "turbo run build",
+		"check-types": "turbo run check-types",
+		"dev:native": "turbo run dev -F native --",
+		"dev:web": "turbo run dev -F web --",
+		"db:push": "turbo run db:push -F @memu/db --",
+		"db:studio": "turbo run db:studio -F @memu/db --",
+		"db:generate": "turbo run db:generate -F @memu/db --",
+		"db:migrate": "turbo run db:migrate -F @memu/db --",
+		"env:generate": "varlock codegen --path ./apps/web/ && varlock codegen --path ./apps/native/ && varlock codegen --path ./packages/db/",
+		"postinstall": "varlock codegen --path ./apps/web/ && varlock codegen --path ./apps/native/ && varlock codegen --path ./packages/db/",
+		"auth:generate": "cd apps/web && pnpm run auth:generate",
+		"check": "biome check --write ."
+	},
+	"dependencies": {
+		"zod": "catalog:"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "^2.5.15",
+		"@memu/config": "workspace:*",
+		"@types/node": "catalog:",
+		"turbo": "^2.11.7",
+		"typescript": "^6.0.3",
+		"varlock": "catalog:"
+	},
+	"packageManager": "pnpm@12.14.0"
+}

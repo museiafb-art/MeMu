@@ -1,0 +1,48 @@
+{
+	"name": "web",
+	"version": "0.1.0",
+	"private": true,
+	"scripts": {
+		"dev": "next dev --port 3001",
+		"build": "tsc -b ../../packages/api && next build",
+		"check-types": "tsc -b ../../packages/api && tsc --noEmit",
+		"start": "next start",
+		"env:generate": "varlock codegen",
+		"auth:generate": "varlock run -- pnpm dlx auth@latest generate --config src/services.ts --output ../../packages/db/src/schema/auth.ts --yes"
+	},
+	"dependencies": {
+		"@memu/api": "workspace:*",
+		"@memu/auth": "workspace:*",
+		"@memu/db": "workspace:*",
+		"@memu/ui": "workspace:*",
+		"@orpc/client": "catalog:",
+		"@orpc/openapi": "catalog:",
+		"@orpc/server": "catalog:",
+		"@orpc/tanstack-query": "catalog:",
+		"@orpc/zod": "catalog:",
+		"@swc/helpers": "^0.5.23",
+		"@tanstack/react-form": "catalog:",
+		"@tanstack/react-query": "catalog:",
+		"@varlock/nextjs-integration": "1.2.2",
+		"babel-plugin-react-compiler": "^1.0.0",
+		"better-auth": "catalog:",
+		"lucide-react": "catalog:",
+		"next": "^16.3.4",
+		"next-themes": "catalog:",
+		"react": "^19.2.8",
+		"react-dom": "^19.2.8",
+		"sonner": "catalog:",
+		"varlock": "catalog:",
+		"zod": "catalog:"
+	},
+	"devDependencies": {
+		"@memu/config": "workspace:*",
+		"@tailwindcss/postcss": "catalog:",
+		"@tanstack/react-query-devtools": "^5.104.2",
+		"@types/node": "catalog:",
+		"@types/react": "^19.2.18",
+		"@types/react-dom": "catalog:",
+		"tailwindcss": "catalog:",
+		"typescript": "^6.0.3"
+	}
+}
